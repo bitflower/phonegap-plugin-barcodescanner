@@ -1016,7 +1016,6 @@ parentViewController:(UIViewController*)parentViewController
         
         // rechts unten
         CGContextMoveToPoint(context, RETICLE_SIZE - 3*RETICLE_OFFSET, RETICLE_SIZE - RETICLE_OFFSET);
-        //CGContextAddLineToPoint(context, RETICLE_SIZE-RETICLE_OFFSET, RETICLE_SIZE - RETICLE_OFFSET);
         CGContextAddArcToPoint(context, RETICLE_SIZE-RETICLE_OFFSET, RETICLE_SIZE - RETICLE_OFFSET, RETICLE_SIZE - RETICLE_OFFSET, RETICLE_OFFSET, RADIUS);
         CGContextAddLineToPoint(context, RETICLE_SIZE-RETICLE_OFFSET, RETICLE_SIZE - 3*RETICLE_OFFSET);
         CGContextDrawPath(context, kCGPathFillStroke);
