@@ -560,15 +560,20 @@ parentViewController:(UIViewController*)parentViewController
 // convert barcode format to string
 //--------------------------------------------------------------------------
 - (NSString*)formatStringFrom:(zxing::BarcodeFormat)format {
-    if (format == zxing::BarcodeFormat_QR_CODE)      return @"QR_CODE";
-    if (format == zxing::BarcodeFormat_DATA_MATRIX)  return @"DATA_MATRIX";
-    if (format == zxing::BarcodeFormat_UPC_E)        return @"UPC_E";
-    if (format == zxing::BarcodeFormat_UPC_A)        return @"UPC_A";
-    if (format == zxing::BarcodeFormat_EAN_8)        return @"EAN_8";
-    if (format == zxing::BarcodeFormat_EAN_13)       return @"EAN_13";
-    if (format == zxing::BarcodeFormat_CODE_128)     return @"CODE_128";
-    if (format == zxing::BarcodeFormat_CODE_39)      return @"CODE_39";
-    if (format == zxing::BarcodeFormat_ITF)          return @"ITF";
+    if (format == zxing::BarcodeFormat_QR_CODE)         return @"QR_CODE";
+    if (format == zxing::BarcodeFormat_DATA_MATRIX)     return @"DATA_MATRIX";
+    if (format == zxing::BarcodeFormat_UPC_E)           return @"UPC_E";
+    if (format == zxing::BarcodeFormat_UPC_A)           return @"UPC_A";
+    if (format == zxing::BarcodeFormat_EAN_8)           return @"EAN_8";
+    if (format == zxing::BarcodeFormat_EAN_13)          return @"EAN_13";
+    if (format == zxing::BarcodeFormat_CODE_128)        return @"CODE_128";
+    if (format == zxing::BarcodeFormat_CODE_39)         return @"CODE_39";
+    if (format == zxing::BarcodeFormat_ITF)             return @"ITF";
+    if (format == zxing::BarcodeFormat_GS1_DATA_MATRIX) return @"GS1_DATA_MATRIX";
+    if (format == zxing::BarcodeFormat_GS1_QR_CODE)     return @"GS1_QR_CODE";
+    // if (format == zxing::BarcodeFormat_GS1_128)  return @"GS1_128";
+    // if (format == zxing::BarcodeFormat_GS1_DATA_BAR)  return @"GS1_DATA_BAR";
+    // if (format == zxing::BarcodeFormat_GS1_COMPOSITE)  return @"GS1_COMPOSITE";
     return @"???";
 }
 

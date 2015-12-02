@@ -72,6 +72,9 @@ public enum BarcodeFormat {
   UPC_E,
 
   /** UPC/EAN extension format. Not a stand-alone format. */
-  UPC_EAN_EXTENSION
+  UPC_EAN_EXTENSION,
+
+  /** Data Matrix 2D barcode format. */
+  GS1_DATA_MATRIX
 
 }

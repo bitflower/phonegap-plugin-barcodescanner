@@ -1743,7 +1743,13 @@ namespace zxing {
 		BarcodeFormat_EAN_13,
 		BarcodeFormat_CODE_128,
 		BarcodeFormat_CODE_39,
-		BarcodeFormat_ITF
+		BarcodeFormat_ITF,
+    BarcodeFormat_GS1_DATA_MATRIX,
+    BarcodeFormat_GS1_QR_CODE
+    //,
+    // BarcodeFormat_GS1_128,
+    // BarcodeFormat_GS1_DATA_BAR,
+    // BarcodeFormat_GS1_COMPOSITE
 	} BarcodeFormat;
 
 	/* if you update the enum, please update the name in BarcodeFormat.cpp */

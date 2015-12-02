@@ -35,7 +35,13 @@ const char *barcodeFormatNames[] = {
     "EAN_13",
     "CODE_128",
     "CODE_39",
-    "ITF"
+    "ITF",
+    "GS1_DATA_MATRIX",
+    "GS1_QR_CODE"
+    // ,
+    // "GS1_128",
+    // "GS1_DATA_BAR",
+    // "GS1_COMPOSITE"
 };
 
 }
@@ -3877,9 +3883,19 @@ Ref<Result> DataMatrixReader::decode(Ref<BinaryBitmap> image, DecodeHints hints)
 #ifdef DEBUG
   cout << "(4) decoded, have decoderResult " << decoderResult.object_ << "\n" << flush;
 #endif
+    
+    Ref<Result> result;
 
-  Ref<Result> result(
-    new Result(decoderResult->getText(), decoderResult->getRawBytes(), points, BarcodeFormat_DATA_MATRIX));
+    // Detect GS1 Codes
+    switch (decoderResult->getRawBytes()[0]) {
+        case 232:
+            result = new Result(decoderResult->getText(), decoderResult->getRawBytes(), points, BarcodeFormat_GS1_DATA_MATRIX);
+            break;
+        default:
+            result = new Result(decoderResult->getText(), decoderResult->getRawBytes(), points, BarcodeFormat_DATA_MATRIX);
+            break;
+    }
+  
 #ifdef DEBUG
   cout << "(5) created result " << result.object_ << ", returning\n" << flush;
 #endif
@@ -4693,9 +4709,10 @@ int DecodedBitStreamParser::decodeAsciiSegment(Ref<BitSource> bits, ostringstrea
     } else if (oneByte == 230) {  // Latch to C40 encodation
       return C40_ENCODE;
     } else if (oneByte == 231) {  // Latch to Base 256 encodation
-      return BASE256_ENCODE;
-    } else if (oneByte == 232) {  // FNC1
-      result << ((char) 29); // translate as ASCII 29
+       return BASE256_ENCODE;
+    // } else if (oneByte == 232) {  // GS1 / FNC1
+    //  result << ((char) 29); // translate as ASCII 29
+    //  result << ']d2'; // translate as ]d2  
     } else if (oneByte == 233 || oneByte == 234) {
       // Structured Append, Reader Programming
       // Ignore these symbols for now
@@ -8931,8 +8948,16 @@ namespace zxing {
 			cout << "(4) decoded, have decoderResult " << decoderResult.object_ << "\n" << flush;
 #endif
 
-			Ref<Result> result(
-							   new Result(decoderResult->getText(), decoderResult->getRawBytes(), points, BarcodeFormat_QR_CODE));
+			Ref<Result> result;
+      result = new Result(decoderResult->getText(), decoderResult->getRawBytes(), points, BarcodeFormat_QR_CODE);
+
+      // Detect GS1 Code
+      switch (decoderResult->getRawBytes()[0]) {
+          case 232:
+              result = new Result(decoderResult->getText(), decoderResult->getRawBytes(), points, BarcodeFormat_GS1_QR_CODE);
+              break;
+      }
+
 #ifdef DEBUG
 			cout << "(5) created result " << result.object_ << ", returning\n" << flush;
 #endif
