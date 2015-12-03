@@ -5,3 +5,6 @@ bin/
 *.iml
 local.properties
 Android Build.txt
+Android.sublime-workspace
+Android.sublime-project
+src/release.keystore
