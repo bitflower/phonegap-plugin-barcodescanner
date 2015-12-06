@@ -76,19 +76,14 @@ public final class DataMatrixReader implements Reader {
     Result result;
    
     // Detect GS1 Codes
-    if (decoderResult.getRawBytes()[0] == 232) {
+    // android.util.Log.i("CODIKETT", decoderResult.getRawBytes()[0]);
+    String codeContent = decoderResult.getText();
+    if (codeContent.startsWith("]d2")) {
+    // if (decoderResult.getRawBytes()[0] == 0xE8) { //232) {
         result = new Result(decoderResult.getText(), decoderResult.getRawBytes(), points, BarcodeFormat.GS1_DATA_MATRIX);
     } else {
         result = new Result(decoderResult.getText(), decoderResult.getRawBytes(), points, BarcodeFormat.DATA_MATRIX);
     }
-    // switch (decoderResult.getRawBytes()[0]) {
-    //     case 232:
-    //         result = new Result(decoderResult.getText(), decoderResult.getRawBytes(), points, BarcodeFormat.GS1_DATA_MATRIX);
-    //         break;
-    //     default:
-    //         result = new Result(decoderResult.getText(), decoderResult.getRawBytes(), points, BarcodeFormat.DATA_MATRIX);
-    //         break;
-    // }
     List<byte[]> byteSegments = decoderResult.getByteSegments();
     if (byteSegments != null) {
       result.putMetadata(ResultMetadataType.BYTE_SEGMENTS, byteSegments);
