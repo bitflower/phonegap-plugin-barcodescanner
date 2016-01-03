@@ -245,10 +245,6 @@ final class DecodedBitStreamParser {
                 result.append(c40char);
               }
             } else if (cValue == 27) {  // FNC1
-              // Test ob Code hier ankommt
-              result.append((char) 93);   // translate as ]d2
-              result.append((char) 100);  // translate as ]d2
-              result.append((char) 50);   // translate as ]d2
               result.append((char) 29); // translate as ASCII 29
             } else if (cValue == 30) {  // Upper Shift
               upperShift = true;
@@ -334,10 +330,6 @@ final class DecodedBitStreamParser {
                 result.append(c40char);
               }
             } else if (cValue == 27) {  // FNC1
-              // Test ob Code hier ankommt
-              result.append((char) 93);   // translate as ]d2
-              result.append((char) 100);  // translate as ]d2
-              result.append((char) 50);   // translate as ]d2
               result.append((char) 29); // translate as ASCII 29
             } else if (cValue == 30) {  // Upper Shift
               upperShift = true;
