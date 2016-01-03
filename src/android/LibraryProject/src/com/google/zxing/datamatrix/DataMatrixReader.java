@@ -32,6 +32,8 @@ import com.google.zxing.common.DetectorResult;
 import com.google.zxing.datamatrix.decoder.Decoder;
 import com.google.zxing.datamatrix.detector.Detector;
 
+import com.google.zxing.common.BitSource;
+
 import java.util.List;
 import java.util.Map;
 
@@ -76,9 +78,10 @@ public final class DataMatrixReader implements Reader {
     Result result;
    
     // Detect GS1 Codes
-    String codeContent = decoderResult.getText();
-    String groupSeparator = Character.toString((char) 29);
-    if (codeContent.startsWith(groupSeparator)) {
+    BitSource bits = new BitSource(decoderResult.getRawBytes());
+    int oneByte = bits.readBits(8);
+
+    if (oneByte == 232) {
         result = new Result(decoderResult.getText(), decoderResult.getRawBytes(), points, BarcodeFormat.GS1_DATA_MATRIX);
     } else {
         result = new Result(decoderResult.getText(), decoderResult.getRawBytes(), points, BarcodeFormat.DATA_MATRIX);
