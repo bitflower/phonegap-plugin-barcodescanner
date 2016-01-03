@@ -169,19 +169,10 @@ public class BarcodeScanner extends CordovaPlugin {
         if (requestCode == REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
 
-                // bitflower test to retrieve raw bytes
-                Bundle extras = intent.getExtras(); 
-                String userName;
-
-                if (extras != null) {
-                    userName = extras.getString("SCAN_RESULT_BYTES");
-                }
-
                 JSONObject obj = new JSONObject();
                 try {
                     obj.put(TEXT, intent.getStringExtra("SCAN_RESULT"));
                     obj.put(FORMAT, intent.getStringExtra("SCAN_RESULT_FORMAT"));
-                    obj.put(DATA, intent.getStringExtra("SCAN_RESULT_BYTES"));
                     obj.put(CANCELLED, false);
                 } catch (JSONException e) {
                     Log.d(LOG_TAG, "This should never happen");
