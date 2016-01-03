@@ -4718,11 +4718,10 @@ int DecodedBitStreamParser::decodeAsciiSegment(Ref<BitSource> bits, ostringstrea
     } else if (oneByte == 231) {  // Latch to Base 256 encodation
        return BASE256_ENCODE;
     } else if (oneByte == 232) {  // GS1 / FNC1
-       //result << ((char) 29); // translate as ASCII 29
-       result << ((char) 93);
-       result << ((char) 100);
-       result << ((char) 50);
-       result << ((char) 29); // translate as ]d2
+       // result << ((char) 93); // translate as ]d2
+       // result << ((char) 100);// translate as ]d2
+       // result << ((char) 50); // translate as ]d2
+       result << ((char) 29); // translate as ASCII 29
     } else if (oneByte == 233 || oneByte == 234) {
       // Structured Append, Reader Programming
       // Ignore these symbols for now
