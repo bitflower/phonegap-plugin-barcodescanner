@@ -64,15 +64,15 @@ public final class DataMatrixReader implements Reader {
       throws NotFoundException, ChecksumException, FormatException {
     DecoderResult decoderResult;
     ResultPoint[] points;
-    // if (hints != null && hints.containsKey(DecodeHintType.PURE_BARCODE)) {
+    if (hints != null && hints.containsKey(DecodeHintType.PURE_BARCODE)) {
       BitMatrix bits = extractPureBits(image.getBlackMatrix());
       decoderResult = decoder.decode(bits);
       points = NO_POINTS;
-    // } else {
-      // DetectorResult detectorResult = new Detector(image.getBlackMatrix()).detect();
-      // decoderResult = decoder.decode(detectorResult.getBits());
-      // points = detectorResult.getPoints();
-    // }
+    } else {
+      DetectorResult detectorResult = new Detector(image.getBlackMatrix()).detect();
+      decoderResult = decoder.decode(detectorResult.getBits());
+      points = detectorResult.getPoints();
+    }
     Result result;
    
     // Detect GS1 Codes
