@@ -148,11 +148,10 @@ final class DecodedBitStreamParser {
       } else if (oneByte == 231) {  // Latch to Base 256 encodation
         return Mode.BASE256_ENCODE;
       } else if (oneByte == 232) { // GS1 / FNC 1
-        // result.append((char) 29); // translate as ASCII 29
-        result.append((char) 93); // translate as ASCII 29
-        result.append((char) 100); // translate as ASCII 29
-        result.append((char) 50); // translate as ASCII 29
-        result.append((char) 29); // translate as ASCII 29
+        // result.append((char) 93);   // translate as ]d2
+        // result.append((char) 100);  // translate as ]d2
+        // result.append((char) 50);   // translate as ]d2
+        result.append((char) 29);   // translate as ASCII 29
       } else if (oneByte == 233 || oneByte == 234) {
         // Structured Append, Reader Programming
         // Ignore these symbols for now
@@ -246,6 +245,10 @@ final class DecodedBitStreamParser {
                 result.append(c40char);
               }
             } else if (cValue == 27) {  // FNC1
+              // Test ob Code hier ankommt
+              result.append((char) 93);   // translate as ]d2
+              result.append((char) 100);  // translate as ]d2
+              result.append((char) 50);   // translate as ]d2
               result.append((char) 29); // translate as ASCII 29
             } else if (cValue == 30) {  // Upper Shift
               upperShift = true;
@@ -331,6 +334,10 @@ final class DecodedBitStreamParser {
                 result.append(c40char);
               }
             } else if (cValue == 27) {  // FNC1
+              // Test ob Code hier ankommt
+              result.append((char) 93);   // translate as ]d2
+              result.append((char) 100);  // translate as ]d2
+              result.append((char) 50);   // translate as ]d2
               result.append((char) 29); // translate as ASCII 29
             } else if (cValue == 30) {  // Upper Shift
               upperShift = true;

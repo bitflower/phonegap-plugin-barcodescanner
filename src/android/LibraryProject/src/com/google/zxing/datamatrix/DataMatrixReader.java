@@ -64,22 +64,22 @@ public final class DataMatrixReader implements Reader {
       throws NotFoundException, ChecksumException, FormatException {
     DecoderResult decoderResult;
     ResultPoint[] points;
-    if (hints != null && hints.containsKey(DecodeHintType.PURE_BARCODE)) {
+    // if (hints != null && hints.containsKey(DecodeHintType.PURE_BARCODE)) {
       BitMatrix bits = extractPureBits(image.getBlackMatrix());
       decoderResult = decoder.decode(bits);
       points = NO_POINTS;
-    } else {
-      DetectorResult detectorResult = new Detector(image.getBlackMatrix()).detect();
-      decoderResult = decoder.decode(detectorResult.getBits());
-      points = detectorResult.getPoints();
-    }
+    // } else {
+      // DetectorResult detectorResult = new Detector(image.getBlackMatrix()).detect();
+      // decoderResult = decoder.decode(detectorResult.getBits());
+      // points = detectorResult.getPoints();
+    // }
     Result result;
    
     // Detect GS1 Codes
     // android.util.Log.i("CODIKETT", decoderResult.getRawBytes()[0]);
-    String codeContent = decoderResult.getText();
-    if (codeContent.startsWith("]d2")) {
-    // if (decoderResult.getRawBytes()[0] == 0xE8) { //232) {
+    // String codeContent = decoderResult.getText();
+    // if (codeContent.startsWith("]d2")) {
+    if (decoderResult.getRawBytes()[0] == 232) { // == 0xE8) {
         result = new Result(decoderResult.getText(), decoderResult.getRawBytes(), points, BarcodeFormat.GS1_DATA_MATRIX);
     } else {
         result = new Result(decoderResult.getText(), decoderResult.getRawBytes(), points, BarcodeFormat.DATA_MATRIX);
